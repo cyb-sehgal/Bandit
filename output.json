@@ -1,0 +1,158 @@
+{
+  "errors": [],
+  "generated_at": "2024-02-29T08:32:33Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 9.0,
+      "CONFIDENCE.LOW": 0.0,
+      "CONFIDENCE.MEDIUM": 0.0,
+      "CONFIDENCE.UNDEFINED": 0.0,
+      "SEVERITY.HIGH": 2.0,
+      "SEVERITY.LOW": 3.0,
+      "SEVERITY.MEDIUM": 4.0,
+      "SEVERITY.UNDEFINED": 0.0,
+      "loc": 57,
+      "nosec": 0
+    },
+    "project/review.py": {
+      "CONFIDENCE.HIGH": 9.0,
+      "CONFIDENCE.LOW": 0.0,
+      "CONFIDENCE.MEDIUM": 0.0,
+      "CONFIDENCE.UNDEFINED": 0.0,
+      "SEVERITY.HIGH": 2.0,
+      "SEVERITY.LOW": 3.0,
+      "SEVERITY.MEDIUM": 4.0,
+      "SEVERITY.UNDEFINED": 0.0,
+      "loc": 57,
+      "nosec": 0
+    }
+  },
+  "results": [
+    {
+      "code": "3 def insecure_function(password):\n4     os.system(\"echo 'Password received: {}'\".format(password))\n5 \n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "HIGH",
+      "issue_text": "Starting a process with a shell, possible injection detected, security issue.",
+      "line_number": 4,
+      "line_range": [
+        4
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/plugins/b605_start_process_with_a_shell.html",
+      "test_id": "B605",
+      "test_name": "start_process_with_a_shell"
+    },
+    {
+      "code": "14     import hashlib\n15     hashed = hashlib.md5(password.encode()).hexdigest()\n16     return hashed\n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of insecure MD2, MD4, MD5, or SHA1 hash function.",
+      "line_number": 15,
+      "line_range": [
+        15
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b303-md5",
+      "test_id": "B303",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "19     import random\n20     return random.random()\n21 \n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "LOW",
+      "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+      "line_number": 20,
+      "line_range": [
+        20
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b311-random",
+      "test_id": "B311",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "22 def pickling_unsafe(obj):\n23     import pickle\n24     return pickle.dumps(obj)\n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with pickle module.",
+      "line_number": 23,
+      "line_range": [
+        23
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b403-import-pickle",
+      "test_id": "B403",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "26 def unsafe_eval(user_input):\n27     result = eval(user_input)\n28     return result\n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of possibly insecure function - consider using safer ast.literal_eval.",
+      "line_number": 27,
+      "line_range": [
+        27
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b307-eval",
+      "test_id": "B307",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "30 def insecure_deserialization(serialized_obj):\n31     import pickle\n32     return pickle.loads(serialized_obj)\n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with pickle module.",
+      "line_number": 31,
+      "line_range": [
+        31
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b403-import-pickle",
+      "test_id": "B403",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "31     import pickle\n32     return pickle.loads(serialized_obj)\n33 \n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "MEDIUM",
+      "issue_text": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+      "line_number": 32,
+      "line_range": [
+        32
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b301-pickle",
+      "test_id": "B301",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "35     import os\n36     os.chmod(path, 777)\n37 \n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "MEDIUM",
+      "issue_text": "Chmod setting a permissive mask 0o1411 on file (path).",
+      "line_number": 36,
+      "line_range": [
+        36
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/plugins/b103_set_bad_file_permissions.html",
+      "test_id": "B103",
+      "test_name": "set_bad_file_permissions"
+    },
+    {
+      "code": "45     import requests\n46     requests.get('https://insecure-website.com', verify=False)\n47 \n",
+      "filename": "project/review.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "HIGH",
+      "issue_text": "Requests call with verify=False disabling SSL certificate checks, security issue.",
+      "line_number": 46,
+      "line_range": [
+        46
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/plugins/b501_request_with_no_cert_validation.html",
+      "test_id": "B501",
+      "test_name": "request_with_no_cert_validation"
+    }
+  ]
+}

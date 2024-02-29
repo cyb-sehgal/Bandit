@@ -1,4 +1,6 @@
 # Analyzing Python Code with Bandit
+![Bandit](https://github.com/cyb-sehgal/Bandit/assets/147884191/05d6e75e-a608-438c-adbd-c09a09e4ea8e)
+
 ## Introduction
 Bandit is a tool designed to find common security issues in Python code. It scans through code to identify potential vulnerabilities and provide a report with suggestions for improvements. This guide will walk you through the installation process of Bandit and how to use it to analyze your Python code or project.
 
